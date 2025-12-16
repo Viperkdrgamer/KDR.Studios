@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KDR Studio - Professional Roblox Development</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">KDR Studio</div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="ClientGames.html">Client Work</a></li>
+                <li><a href="contact.html">Hire Us</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">KDR Studio</h1>
+                <p class="hero-subtitle">Professional Roblox Development Team</p>
+                <p class="hero-description">Creating immersive experiences and bringing your visions to life</p>
+                <a href="contact.html" class="btn btn-primary">Hire Our Team</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Published Games Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Published Games</h2>
+            <div id="published-games" class="game-grid">
+                <div class="loading">Loading games...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Current Projects</h2>
+            <div id="projects" class="project-grid">
+                <div class="loading">Loading projects...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Our Team</h2>
+            <div id="team" class="team-grid">
+                <div class="loading">Loading team...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developer Profile Modal -->
+    <div id="dev-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="dev-profile">
+                <div class="dev-header">
+                    <img id="modal-avatar" src="" alt="" class="dev-avatar-large">
+                    <div>
+                        <h2 id="modal-name"></h2>
+                        <p id="modal-role" class="dev-role"></p>
+                        <p id="modal-skills" class="dev-skills"></p>
+                    </div>
+                </div>
+                <div class="dev-works">
+                    <h3>Portfolio</h3>
+                    <div id="modal-works" class="works-container">
+                        <div class="loading">Loading works...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 KDR Studio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

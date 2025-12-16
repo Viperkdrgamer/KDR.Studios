@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Work - KDR Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">KDR Studio</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="client-games.html" class="active">Client Work</a></li>
+                <li><a href="contact.html">Hire Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Client Work</h1>
+            <p>Games we've built for our valued clients</p>
+        </div>
+    </section>
+
+    <!-- Client Games Section -->
+    <section class="section">
+        <div class="container">
+            <div id="client-games" class="game-grid">
+                <div class="loading">Loading client work...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 KDR Studio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Load client games on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadClientGames();
+        });
+    </script>
+</body>
+</html>

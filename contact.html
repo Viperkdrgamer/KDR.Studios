@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hire Us - KDR Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">KDR Studio</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="client-games.html">Client Work</a></li>
+                <li><a href="contact.html" class="active">Hire Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Hire Our Team</h1>
+            <p>Let's bring your Roblox game to life</p>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="section">
+        <div class="container">
+            <div class="form-container">
+                <form id="commission-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="game-type">Game Type *</label>
+                        <input type="text" id="game-type" name="game-type" required placeholder="e.g., Battle Royale, RPG, Simulator">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="game-description">Game Description *</label>
+                        <textarea id="game-description" name="game-description" rows="5" required placeholder="Describe your game concept, features, and vision..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Budget (USD) *</label>
+                        <input type="text" id="budget" name="budget" required placeholder="e.g., $1000 - $5000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="team-type">Team Selection *</label>
+                        <select id="team-type" name="team-type" required>
+                            <option value="">Select an option</option>
+                            <option value="full-team">Full Team</option>
+                            <option value="specific-dev">Specific Developer</option>
+                        </select>
+                    </div>
+
+                    <div id="dev-fields" class="dev-fields" style="display: none;">
+                        <div class="form-group">
+                            <label for="dev-role">Developer Role *</label>
+                            <select id="dev-role" name="dev-role">
+                                <option value="">Select role</option>
+                                <option value="Programmer">Programmer</option>
+                                <option value="Builder">Builder</option>
+                                <option value="3D Modeler">3D Modeler</option>
+                                <option value="UI/UX Designer">UI/UX Designer</option>
+                                <option value="Scripter">Scripter</option>
+                                <option value="Game Designer">Game Designer</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experience">Minimum Years of Experience *</label>
+                            <input type="number" id="experience" name="experience" min="0" max="20" placeholder="e.g., 2">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discord-username">Your Discord Username *</label>
+                        <input type="text" id="discord-username" name="discord-username" required placeholder="username#0000 or @username">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-submit">Send Commission Request</button>
+                    
+                    <div id="form-message" class="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 KDR Studio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Show/hide developer-specific fields
+        document.getElementById('team-type').addEventListener('change', (e) => {
+            const devFields = document.getElementById('dev-fields');
+            const devRole = document.getElementById('dev-role');
+            const experience = document.getElementById('experience');
+            
+            if (e.target.value === 'specific-dev') {
+                devFields.style.display = 'block';
+                devRole.required = true;
+                experience.required = true;
+            } else {
+                devFields.style.display = 'none';
+                devRole.required = false;
+                experience.required = false;
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('commission-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await handleCommissionSubmit(e);
+        });
+    </script>
+</body>
+</html>
