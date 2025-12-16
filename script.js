@@ -6,15 +6,16 @@ const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/144244506785506922
 
 // ===== SUPABASE CLIENT =====
 // Simple fetch-based Supabase client for static hosting
+// REPLACE the entire supabase object with this:
 const supabase = {
   from: (table) => ({
-    select: async (columns = '*', options = {}) => {
+    select: async (columns = '*', filters = {}) => {
       try {
         let url = `${SUPABASE_URL}/rest/v1/${table}?select=${columns}`;
         
-        // Add filters if provided
-        if (options.eq) {
-          Object.entries(options.eq).forEach(([key, value]) => {
+        // Add filters properly
+        if (filters.eq) {
+          Object.entries(filters.eq).forEach(([key, value]) => {
             url += `&${key}=eq.${value}`;
           });
         }
@@ -22,11 +23,17 @@ const supabase = {
         const response = await fetch(url, {
           headers: {
             'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json'
           }
         });
         
-        if (!response.ok) throw new Error('Failed to fetch data');
+        if (!response.ok) {
+          const error = await response.text();
+          console.error('Supabase error:', error);
+          return [];
+        }
+        
         return await response.json();
       } catch (error) {
         console.error(`Error fetching from ${table}:`, error);
