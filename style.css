@@ -546,3 +546,84 @@ body {
         font-size: 2rem;
     }
 }
+/* Add this to the end of style.css */
+
+/* ===== DEVELOPERS WORKS PAGE ===== */
+.developers-works-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.developer-section {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+}
+
+.developer-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.developer-header:hover {
+    transform: translateX(5px);
+}
+
+.dev-avatar-medium {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    object-fit: cover;
+}
+
+.dev-name-large {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.dev-works-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.work-preview-item {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid var(--border);
+}
+
+.work-title-small {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+}
+
+.work-video-preview {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+    margin-bottom: 0.8rem;
+}
+
+.work-description-small {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.view-all-btn {
+    width: 100%;
+    margin-top: 1rem;
+}
