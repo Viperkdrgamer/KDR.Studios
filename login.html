@@ -158,7 +158,6 @@
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
         
-        // FIXED: Use your actual Supabase credentials
         const SUPABASE_URL = 'https://vxuqaphvuyfjoufjyvxb.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ4dXFhcGh2dXlmam91Zmp5dnhiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU5MTAzODYsImV4cCI6MjA4MTQ4NjM4Nn0.OzNNnTYJPAWawuSjd4C-rpDwDZvkmcw9VgcR9MBpTTc';
         const ADMIN_EMAIL = 'karimullah.achkzai@gmail.com';
@@ -234,6 +233,12 @@
             submitBtn.textContent = 'Creating account...';
             
             try {
+                // Determine if admin
+                const isAdmin = email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+                const userRole = isAdmin ? 'admin' : role;
+                
+                console.log('Signing up:', { email, name, role: userRole });
+                
                 // Sign up with Supabase Auth
                 const { data: authData, error: authError } = await supabase.auth.signUp({
                     email,
@@ -241,24 +246,47 @@
                     options: {
                         data: {
                             name,
-                            role: email.toLowerCase() === ADMIN_EMAIL.toLowerCase() ? 'admin' : role
+                            role: userRole
                         }
                     }
                 });
                 
                 if (authError) throw authError;
                 
-                // Create user profile in database
-                const { error: profileError } = await supabase
-                    .from('users')
-                    .insert([{
-                        id: authData.user.id,
-                        email,
-                        name,
-                        role: email.toLowerCase() === ADMIN_EMAIL.toLowerCase() ? 'admin' : role
-                    }]);
+                console.log('Auth data:', authData);
                 
-                if (profileError) throw profileError;
+                // Wait a moment for trigger to run
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Verify profile was created, if not create it manually
+                const { data: existingProfile } = await supabase
+                    .from('users')
+                    .select('*')
+                    .eq('id', authData.user.id)
+                    .single();
+                
+                if (!existingProfile) {
+                    console.log('Profile not found, creating manually...');
+                    
+                    // Create user profile manually
+                    const { error: profileError } = await supabase
+                        .from('users')
+                        .insert([{
+                            id: authData.user.id,
+                            email,
+                            name,
+                            role: userRole
+                        }]);
+                    
+                    if (profileError) {
+                        console.error('Profile creation error:', profileError);
+                        throw profileError;
+                    }
+                    
+                    console.log('Profile created manually');
+                } else {
+                    console.log('Profile already exists:', existingProfile);
+                }
                 
                 messageDiv.className = 'form-message success';
                 messageDiv.textContent = '✅ Account created! Redirecting...';
@@ -267,6 +295,7 @@
                     window.location.href = 'dashboard.html';
                 }, 1500);
             } catch (error) {
+                console.error('Signup error:', error);
                 messageDiv.className = 'form-message error';
                 messageDiv.textContent = `❌ ${error.message}`;
                 submitBtn.disabled = false;
